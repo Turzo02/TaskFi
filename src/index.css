@@ -1,7 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+:root {
+  /* ------------------------------------------
+     LIGHT MODE COLOR PALETTE
+     ------------------------------------------ */
 
-body {
-  font-family: "Inter", sans-serif;
+  /* Backgrounds */
+  --bg-primary: #F9FAFB;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F1F5F9;
+
+  /* Text */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --text-inverse: #FFFFFF;
+
+  /* Accent - Indigo */
+  --accent-primary: #4F46E5;
+  --accent-hover: #4338CA;
+  --accent-soft: #EEF2FF;
+
+  /* Borders */
+  --border-default: #E2E8F0;
+  --border-soft: #F1F5F9;
+
+  /* Status Colors */
+  --success: #16A34A;
+  --warning: #D97706;
+  --error: #DC2626;
+  --info: #0EA5E9;
+
+  /* Role Accents */
+  --worker-accent: rgba(22, 163, 74, 0.12);
+  --buyer-accent: rgba(14, 165, 233, 0.12);
+  --admin-accent: rgba(147, 51, 234, 0.12);
+}
+
+/* ============================================
+   DARK MODE COLOR PALETTE
+   ============================================ */
+[data-theme="dark"] {
+  /* Backgrounds (Near-Black, Not Pure Black) */
+  --bg-primary: #020617;
+  --bg-surface: #0F172A;
+  --bg-elevated: #111827;
+
+  /* Text (Off-White, Not Pure White) */
+  --text-primary: #E5E7EB;
+  --text-secondary: #A1A1AA;
+  --text-muted: #6B7280;
+  --text-inverse: #0F172A;
+
+  /* Accent */
+  --accent-primary: #6366F1;
+  --accent-hover: #818CF8;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+
+  /* Borders */
+  --border-default: #1E293B;
+  --border-soft: #0B1220;
+
+  /* Status Colors */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --info: #38BDF8;
+}
+
+/* ============================================
+   GLOBAL RESETS & APPLICATION
+   ============================================ */
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* APPLYING THE VARIABLES HERE */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    
+    /* SMOOTH THEME TRANSITION */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR (Crucial for Dark Mode)
+   ============================================ */
+
+/* Width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 999px;
+  border: 2px solid var(--bg-primary); /* Creates padding effect */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
 }
