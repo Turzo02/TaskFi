@@ -27,7 +27,7 @@ const FeaturesSection = () => {
       
 
 
-      <div className="container mx-auto max-w-6xl relative z-10">
+      <div className="container mx-auto max-w-7xl relative z-10">
         
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">

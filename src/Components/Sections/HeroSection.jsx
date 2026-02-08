@@ -8,9 +8,9 @@ const HeroSection = () => {
       {/* 🌌 BACKGROUND ATMOSPHERE (The "Aurora" Effect) */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Top Right Green Blob */}
-        <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-brand/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse-slow" />
+        <div className="absolute top-[-10%] right-[-5%] w-125 h-125 bg-brand-sec/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
         {/* Bottom Left Mint Blob */}
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-brand-sec/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-125 h-125 bg-brand-sec/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen" />
         
         {/* Grid Pattern Overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />

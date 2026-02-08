@@ -74,41 +74,36 @@
     inset 2px 2px 4px rgba(255, 255, 255, 0.4);
 }
 
+
 [data-theme="dark"] {
-  /* ------------------------------------------
-     DARK THEME ("Neon Jungle") 🐍
-     (You liked this one, so I kept it mostly the same)
-     ------------------------------------------ */
-  
-  /* Backgrounds */
-  --bg-primary: #020604;       /* Void Black */
-  --bg-surface: #05140a;       /* Dark Cyber Green */
-  --bg-elevated: #0a2615;      /* Forest Green */
+  /* Backgrounds: Warm Coffee/Charcoal */
+  --bg-primary: #1c1917;       
+  --bg-surface: #292524;       
+  --bg-elevated: #44403c;      
 
   /* Text */
-  --text-primary: #ffffff;     /* Pure White */
-  --text-secondary: #dcfce7;   /* Pale Mint */
-  --text-muted: #4ade80;       /* Neon Green Muted */
-  --text-inverse: #020604;     /* Black */
+  --text-primary: #f5f5f4;     /* Warm White */
+  --text-secondary: #d6d3d1;   /* Stone Gray */
+  --text-muted: #a8a29e;       /* Warm Gray */
+  --text-inverse: #1c1917;     
 
   /* Brand */
-  --brand-primary: #22c55e;    /* Neon Green */
-  --brand-secondary: #86efac;  /* Mint Glow */
+  --brand-primary: #fbbf24;    /* Warm Amber */
+  --brand-secondary: #fcd34d;  /* Soft Gold */
 
   /* Borders */
-  --border-default: #14532d;   
+  --border-default: #44403c;   
 
-  /* Clay Dark */
+  /* Shadows */
   --clay-shadow: 
-    0 15px 35px -10px rgba(0, 0, 0, 0.8),    
-    0 0 15px rgba(34, 197, 94, 0.1),         
-    inset 1px 1px 1px rgba(255, 255, 255, 0.15),
-    inset -1px -1px 10px rgba(0, 0, 0, 0.5);
-
+    0 10px 30px -10px rgba(0, 0, 0, 0.7),
+    0 0 10px rgba(251, 191, 36, 0.05),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.08);
   --clay-btn-shadow:
-    0 0 20px rgba(34, 197, 94, 0.4),         
-    inset 2px 2px 4px rgba(255, 255, 255, 0.2);
+    0 4px 12px rgba(251, 191, 36, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
+
 
 /* ============================================
    3. GLOBAL RESETS
