@@ -1,119 +1,210 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
+
+/* ============================================
+   1. TAILWIND v4 THEME CONFIGURATION
+   ============================================ */
+@theme {
+  /* Mapping Semantic Names to Variables */
+  --color-bg-primary: var(--bg-primary);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+
+  --color-text-main: var(--text-primary);
+  --color-text-sec: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inv: var(--text-inverse);
+
+  --color-brand: var(--brand-primary);
+  --color-brand-sec: var(--brand-secondary);
+  
+  --color-border-base: var(--border-default);
+
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; filter: brightness(1); }
+    50% { opacity: 0.8; filter: brightness(1.2); }
+  }
+}
+
+/* ============================================
+   2. CSS VARIABLES
+   ============================================ */
 
 :root {
   /* ------------------------------------------
-     LIGHT MODE COLOR PALETTE
+     LIGHT THEME ("Premium Porcelain") 💎
+     Crisp, High-Contrast, Professional.
      ------------------------------------------ */
+  
+  /* Backgrounds: Cleaner, less "sickly green" */
+  --bg-primary: #F4F7F5;       /* Neutral Off-White with tiny green tint */
+  --bg-surface: #FFFFFF;       /* Pure White */
+  --bg-elevated: #EBF0ED;      /* Light Grey-Green for inputs */
 
+  /* Text: Darker, Sharper, More Readable */
+  --text-primary: #0F1A12;     /* Almost Black (Deepest Green) */
+  --text-secondary: #2D4032;   /* Dark Forest */
+  --text-muted: #64748B;       /* Cool Grey (Cleaner than green-grey) */
+  --text-inverse: #FFFFFF;     /* White text */
+
+  /* Brand Accents: Punchy Emerald */
+  --brand-primary: #10B981;    /* Emerald-500 (Vibrant) */
+  --brand-secondary: #34D399;  /* Emerald-400 (Bright) */
+
+  /* Borders */
+  --border-default: #E2E8F0;   /* Slate-200 (Clean, not green) */
+
+  /* CLAY SHADOWS (Light Mode Fixed) */
+  /* Using Grey shadows instead of Green shadows makes it look cleaner */
+  --clay-shadow: 
+    10px 10px 30px rgba(0, 0, 0, 0.08),      /* Soft Grey Shadow */
+    -8px -8px 20px rgba(255, 255, 255, 1),   /* Pure White Highlight */
+    inset 2px 2px 5px rgba(255, 255, 255, 0.5);
+
+  --clay-btn-shadow:
+    6px 6px 15px rgba(16, 185, 129, 0.4),    /* Green Glow only on Buttons */
+    inset 2px 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] {
+  /* ------------------------------------------
+     DARK THEME ("Neon Jungle") 🐍
+     (You liked this one, so I kept it mostly the same)
+     ------------------------------------------ */
+  
   /* Backgrounds */
-  --bg-primary: #F9FAFB;
-  --bg-surface: #FFFFFF;
-  --bg-elevated: #F1F5F9;
+  --bg-primary: #020604;       /* Void Black */
+  --bg-surface: #05140a;       /* Dark Cyber Green */
+  --bg-elevated: #0a2615;      /* Forest Green */
 
   /* Text */
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --text-inverse: #FFFFFF;
+  --text-primary: #ffffff;     /* Pure White */
+  --text-secondary: #dcfce7;   /* Pale Mint */
+  --text-muted: #4ade80;       /* Neon Green Muted */
+  --text-inverse: #020604;     /* Black */
 
-  /* Accent - Indigo */
-  --accent-primary: #4F46E5;
-  --accent-hover: #4338CA;
-  --accent-soft: #EEF2FF;
+  /* Brand */
+  --brand-primary: #22c55e;    /* Neon Green */
+  --brand-secondary: #86efac;  /* Mint Glow */
 
   /* Borders */
-  --border-default: #E2E8F0;
-  --border-soft: #F1F5F9;
+  --border-default: #14532d;   
 
-  /* Status Colors */
-  --success: #16A34A;
-  --warning: #D97706;
-  --error: #DC2626;
-  --info: #0EA5E9;
+  /* Clay Dark */
+  --clay-shadow: 
+    0 15px 35px -10px rgba(0, 0, 0, 0.8),    
+    0 0 15px rgba(34, 197, 94, 0.1),         
+    inset 1px 1px 1px rgba(255, 255, 255, 0.15),
+    inset -1px -1px 10px rgba(0, 0, 0, 0.5);
 
-  /* Role Accents */
-  --worker-accent: rgba(22, 163, 74, 0.12);
-  --buyer-accent: rgba(14, 165, 233, 0.12);
-  --admin-accent: rgba(147, 51, 234, 0.12);
+  --clay-btn-shadow:
+    0 0 20px rgba(34, 197, 94, 0.4),         
+    inset 2px 2px 4px rgba(255, 255, 255, 0.2);
 }
 
 /* ============================================
-   DARK MODE COLOR PALETTE
+   3. GLOBAL RESETS
    ============================================ */
-[data-theme="dark"] {
-  /* Backgrounds (Near-Black, Not Pure Black) */
-  --bg-primary: #020617;
-  --bg-surface: #0F172A;
-  --bg-elevated: #111827;
-
-  /* Text (Off-White, Not Pure White) */
-  --text-primary: #E5E7EB;
-  --text-secondary: #A1A1AA;
-  --text-muted: #6B7280;
-  --text-inverse: #0F172A;
-
-  /* Accent */
-  --accent-primary: #6366F1;
-  --accent-hover: #818CF8;
-  --accent-soft: rgba(99, 102, 241, 0.15);
-
-  /* Borders */
-  --border-default: #1E293B;
-  --border-soft: #0B1220;
-
-  /* Status Colors */
-  --success: #22C55E;
-  --warning: #F59E0B;
-  --error: #EF4444;
-  --info: #38BDF8;
-}
-
-/* ============================================
-   GLOBAL RESETS & APPLICATION
-   ============================================ */
-
 @layer base {
   html {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    /* APPLYING THE VARIABLES HERE */
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    
-    /* SMOOTH THEME TRANSITION */
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    
+    /* Subtle Grain Texture (Makes Light Mode look expensive) */
+    background-image: 
+       radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.05), transparent 40%);
+    background-attachment: fixed;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    letter-spacing: -0.025em;
   }
 }
 
 /* ============================================
-   CUSTOM SCROLLBAR (Crucial for Dark Mode)
+   4. CLAYMORPHISM UTILITIES
    ============================================ */
+@layer utilities {
+  
+  .clay-card {
+    background-color: var(--bg-surface);
+    border-radius: 24px;
+    box-shadow: var(--clay-shadow);
+    border: 1px solid rgba(0,0,0,0.03); /* Clean border in light mode */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  [data-theme="dark"] .clay-card {
+    border: 1px solid var(--border-default);
+  }
 
-/* Width */
-::-webkit-scrollbar {
-  width: 10px;
+  .clay-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--clay-shadow), 0 20px 40px -10px rgba(var(--brand-primary), 0.15);
+  }
+
+  .clay-btn {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    color: var(--text-inverse);
+    border-radius: 16px;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    box-shadow: var(--clay-btn-shadow);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .clay-btn:hover {
+    transform: scale(1.03) translateY(-1px);
+    filter: brightness(1.1);
+  }
+  
+  .clay-btn:active {
+    transform: scale(0.97);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--text-primary) 20%, var(--brand-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+  
+  .glass {
+    background: rgba(var(--bg-surface), 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(var(--brand-primary), 0.1);
+  }
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-/* Handle */
+/* ============================================
+   5. SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
-  border-radius: 999px;
-  border: 2px solid var(--bg-primary); /* Creates padding effect */
+  background: var(--brand-primary);
+  opacity: 0.8;
+  border-radius: 99px;
+  border: 3px solid var(--bg-primary);
 }
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--brand-secondary); }
