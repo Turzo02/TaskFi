@@ -1,64 +1,96 @@
 import { NavLink } from 'react-router';
+import { 
+  LayoutDashboard, 
+  ListTodo, 
+  FileCheck, 
+  Wallet, 
+  PlusCircle, 
+  CreditCard, 
+  Users, 
+  Settings 
+} from 'lucide-react';
 
 const Sidebar = ({ role = 'worker' }) => {
-  const workerLinks = [
-    { label: 'Dashboard', href: '/dashboard/worker' },
-    { label: 'Available Tasks', href: '/dashboard/worker/tasks' },
-    { label: 'My Submissions', href: '/dashboard/worker/submissions' },
-    { label: 'Withdrawals', href: '/dashboard/worker/withdrawals' },
-  ];
 
-  const buyerLinks = [
-    { label: 'Dashboard', href: '/dashboard/buyer' },
-    { label: 'My Tasks', href: '/dashboard/buyer/tasks' },
-    { label: 'Add Task', href: '/dashboard/buyer/add-task' },
-    { label: 'Purchase Coins', href: '/dashboard/buyer/purchase' },
-    { label: 'Payments', href: '/dashboard/buyer/payments' },
-  ];
-
-  const adminLinks = [
-    { label: 'Dashboard', href: '/dashboard/admin' },
-    { label: 'Manage Users', href: '/dashboard/admin/users' },
-    { label: 'Manage Tasks', href: '/dashboard/admin/tasks' },
-  ];
-
-  const links = role === 'admin' ? adminLinks : role === 'buyer' ? buyerLinks : workerLinks;
-
-  const roleColors = {
-    worker: 'border-l-green-500 bg-green-900/20',
-    buyer: 'border-l-blue-500 bg-blue-900/20',
-    admin: 'border-l-purple-500 bg-purple-900/20'
+  const navConfigs = {
+    worker: {
+      theme: 'text-emerald-500 bg-emerald-500/10 border-emerald-500',
+      hover: 'hover:bg-emerald-500/5 hover:text-emerald-500',
+      links: [
+        { label: 'Overview', href: '/dashboard/worker', icon: LayoutDashboard },
+        { label: 'Task Market', href: '/dashboard/worker/tasks', icon: ListTodo },
+        { label: 'Submissions', href: '/dashboard/worker/submissions', icon: FileCheck },
+        { label: 'Withdrawals', href: '/dashboard/worker/withdrawals', icon: Wallet },
+      ]
+    },
+    buyer: {
+      theme: 'text-blue-500 bg-blue-500/10 border-blue-500',
+      hover: 'hover:bg-blue-500/5 hover:text-blue-500',
+      links: [
+        { label: 'Overview', href: '/dashboard/buyer', icon: LayoutDashboard },
+        { label: 'My Tasks', href: '/dashboard/buyer/tasks', icon: ListTodo },
+        { label: 'Create Task', href: '/dashboard/buyer/add-task', icon: PlusCircle },
+        { label: 'Buy Coins', href: '/dashboard/buyer/purchase', icon: CreditCard },
+        { label: 'History', href: '/dashboard/buyer/payments', icon: FileCheck },
+      ]
+    },
+    admin: {
+      theme: 'text-violet-500 bg-violet-500/10 border-violet-500',
+      hover: 'hover:bg-violet-500/5 hover:text-violet-500',
+      links: [
+        { label: 'Overview', href: '/dashboard/admin', icon: LayoutDashboard },
+        { label: 'Users', href: '/dashboard/admin/users', icon: Users },
+        { label: 'All Tasks', href: '/dashboard/admin/tasks', icon: ListTodo },
+        { label: 'Settings', href: '/dashboard/admin/settings', icon: Settings },
+      ]
+    }
   };
 
-  return (
-    <aside className={`fixed left-0 top-0 h-full w-64 bg-slate-800 text-white border-r-4 ${roleColors[role]} overflow-y-auto`}>
-      <div className="p-6">
-        <h2 className="text-xl font-bold mb-1 capitalize">{role}</h2>
-        <p className="text-slate-400 text-sm">Dashboard</p>
-      </div>
+  const currentConfig = navConfigs[role] || navConfigs.worker;
 
-      <nav className="px-4 pb-6">
-        <ul className="space-y-2">
-          {links.map((link) => (
-            <li key={link.href}>
-              <NavLink
-                to={link.href}
-                end={link.href.endsWith(role)}
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded transition-colors ${
-                    isActive
-                      ? 'bg-slate-700 text-white'
-                      : 'text-slate-300 hover:bg-slate-700 hover:text-white'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </aside>
+  return (
+    <nav className="space-y-1">
+      {currentConfig.links.map((link) => {
+        const Icon = link.icon;
+        
+        return (
+          <NavLink
+            key={link.href}
+            to={link.href}
+            end={link.href === `/dashboard/${role}`}
+            className={({ isActive }) =>
+              `group relative flex items-center gap-3 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 ease-out
+              ${isActive 
+                ? `${currentConfig.theme} shadow-sm` 
+                : `text-text-muted ${currentConfig.hover}`
+              }`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                {/* Active Indicator Bar */}
+                {isActive && (
+                  <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full bg-current opacity-50`} />
+                )}
+
+                {/* Icon with scale animation */}
+                <Icon 
+                  className={`w-5 h-5 transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} 
+                  strokeWidth={isActive ? 2.5 : 2}
+                />
+                
+                <span className="tracking-wide">{link.label}</span>
+
+                {/* Hover Arrow (Subtle) */}
+                {!isActive && (
+                  <div className="absolute right-4 w-1.5 h-1.5 rounded-full bg-current opacity-0 group-hover:opacity-100 transition-opacity" />
+                )}
+              </>
+            )}
+          </NavLink>
+        );
+      })}
+    </nav>
   );
 };
 

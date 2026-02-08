@@ -1,144 +1,171 @@
-import { Link } from 'react-router';
-import { Wallet, ArrowRight, Twitter, Linkedin, Github, Send, Heart } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router";
+import {
+  ArrowUpRight,
+  Wallet,
+  Twitter,
+  Linkedin,
+  Github,
+  Send,
+  ShieldCheck,
+  Heart,
+  Globe,
+} from "lucide-react";
+import Logo from "../../Components/Shared/Logo";
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative pt-24 pb-10 px-4 md:px-6 bg-bg-primary overflow-hidden border-t border-brand/5">
-      
+    <footer className="relative bg-bg-primary pt-32 pb-6 overflow-hidden">
+      {/* 🟢 1. MASSIVE BACKGROUND WATERMARK (The Trend) */}
+      <div className="absolute bottom-[-5%] left-1/2 -translate-x-1/2 w-full select-none pointer-events-none z-0">
+        <h1 className="text-[18vw] leading-none font-black text-center text-text-main opacity-[0.03] tracking-tighter">
+          TASKFI
+        </h1>
+      </div>
 
-      <div className="container mx-auto max-w-7xl relative z-10">
-        
-        {/* 🔥 FLOATING CTA CARD (Claymorphism Style) */}
-        <div className="clay-card p-8 md:p-12 mb-20 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left relative overflow-hidden">
-          
-          {/* Decorative Circle inside Card */}
-          <div className="absolute -right-10 -top-10 w-40 h-40 bg-brand/10 rounded-full blur-2xl" />
+      {/* 🟢 2. AMBIENT GLOW FX */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute top-20 left-[10%] w-96 h-96 bg-brand/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 right-[10%] w-96 h-96 bg-brand-sec/5 rounded-full blur-[100px]" />
+      </div>
 
-          <div className="max-w-2xl relative z-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-text-main mb-3 tracking-tight">
-              Ready to grow your wallet?
-            </h2>
-            <p className="text-lg text-text-muted font-medium">
-              Join the ecosystem where ambition meets opportunity. Start earning coins today.
-            </p>
-          </div>
-          
-          <Link 
-            to="/register" 
-            className="clay-btn group flex items-center gap-2 text-lg shadow-xl"
-          >
-            Get Started
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* 🍱 3. BENTO GRID LAYOUT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-24">
+          {/* BLOCK A: Brand & Mission (Span 5) */}
+          <div className="lg:col-span-5 flex flex-col justify-between h-full">
+            <div className="mb-10">
+              <Logo></Logo>
+              <p className="text-xl text-text-muted font-medium max-w-md leading-relaxed">
+                The decentralized layer for the global gig economy. We connect
+                ambition with opportunity through secure, instant
+                micro-transactions.
+              </p>
+            </div>
 
-        {/* 🗺️ FOOTER LINKS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          
-          {/* 1. BRAND COLUMN (Span 4) */}
-          <div className="lg:col-span-4 space-y-6">
-            <Link to="/" className="inline-flex items-center gap-3 group">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand to-brand-sec flex items-center justify-center shadow-lg shadow-brand/20 group-hover:scale-110 transition-transform duration-300">
-                <Wallet className="w-6 h-6 text-text-inv" />
-              </div>
-              <span className="text-3xl font-extrabold tracking-tight text-text-main">
-                Task<span className="text-brand">Fi</span>
-              </span>
-            </Link>
-            <p className="text-text-muted font-medium leading-relaxed max-w-sm">
-              We are redesigning the micro-economy. Secure, transparent, and built for the future of work.
-            </p>
-            
-            <div className="flex gap-3 pt-2">
+            {/* Magnetic Social Buttons */}
+            <div className="flex gap-4">
               {[Twitter, Github, Linkedin].map((Icon, i) => (
-                <a 
-                  key={i} 
-                  href="#" 
-                  className="w-10 h-10 rounded-xl bg-bg-surface border border-border-base flex items-center justify-center text-text-muted hover:text-white hover:bg-brand hover:border-brand transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1"
+                <a
+                  key={i}
+                  href="#"
+                  className="w-14 h-14 rounded-full bg-bg-surface border border-border-base flex items-center justify-center text-text-muted hover:text-white hover:bg-brand hover:border-brand transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-2 group"
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* 2. PLATFORM LINKS (Span 2) */}
-          <div className="lg:col-span-2 space-y-6">
-            <h4 className="font-bold text-text-main text-lg tracking-tight">Platform</h4>
-            <ul className="space-y-3">
-              {[
-                { name: 'Browse Tasks', path: '/dashboard/worker/tasks' },
-                { name: 'Post a Task', path: '/dashboard/buyer/add-task' },
-                { name: 'Pricing', path: '/dashboard/buyer/purchase' },
-                { name: 'Leaderboard', path: '/' },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    to={link.path} 
-                    className="text-text-muted hover:text-brand font-medium transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-border-base group-hover:bg-brand transition-colors" />
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* BLOCK B: Navigation Columns (Span 3) */}
+          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-4 content-start">
+            <div>
+              <h4 className="font-bold text-text-main mb-6 flex items-center gap-2">
+                Platform
+              </h4>
+              <ul className="space-y-4">
+                {["Browse Tasks", "Post a Task", "Pricing", "Leaderboard"].map(
+                  (item) => (
+                    <li key={item}>
+                      <Link
+                        to="#"
+                        className="group flex items-center gap-2 text-text-muted hover:text-brand font-medium transition-colors"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-border-base group-hover:bg-brand transition-all duration-300 group-hover:w-3" />
+                        {item}
+                      </Link>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-text-main mb-6">Company</h4>
+              <ul className="space-y-4">
+                {["About", "Careers", "Press", "Legal"].map((item) => (
+                  <li key={item}>
+                    <Link
+                      to="#"
+                      className="group flex items-center gap-2 text-text-muted hover:text-brand font-medium transition-colors"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-border-base group-hover:bg-brand transition-all duration-300 group-hover:w-3" />
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* 3. COMPANY LINKS (Span 2) */}
-          <div className="lg:col-span-2 space-y-6">
-            <h4 className="font-bold text-text-main text-lg tracking-tight">Company</h4>
-            <ul className="space-y-3">
-              {['About Us', 'Careers', 'Privacy Policy', 'Terms'].map((item) => (
-                <li key={item}>
-                  <Link to="#" className="text-text-muted hover:text-brand font-medium transition-colors block hover:translate-x-1 duration-200">
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* BLOCK C: Newsletter Card (Span 4) */}
+          <div className="lg:col-span-4">
+            <div className="clay-card p-8 h-full relative overflow-hidden group">
+              {/* Card Decor */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-full blur-2xl group-hover:bg-brand/20 transition-colors duration-500" />
 
-          {/* 4. NEWSLETTER (Span 4) */}
-          <div className="lg:col-span-4 space-y-6">
-            <h4 className="font-bold text-text-main text-lg tracking-tight">Stay in the loop</h4>
-            <p className="text-text-muted text-sm">
-              Get the latest tasks and earning tips delivered to your inbox.
-            </p>
-            
-            <form className="relative group">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="w-full bg-bg-surface border border-border-base rounded-2xl pl-5 pr-14 py-4 text-text-main placeholder:text-text-muted/60 focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition-all shadow-sm group-hover:shadow-md"
-              />
-              <button 
-                type="button"
-                className="absolute right-2 top-2 bottom-2 aspect-square bg-brand hover:bg-brand-sec text-text-inv rounded-xl transition-colors flex items-center justify-center shadow-lg"
+              <h3 className="text-2xl font-bold text-text-main mb-2 relative z-10">
+                Stay in the loop
+              </h3>
+              <p className="text-text-muted mb-8 relative z-10">
+                Join 50,000+ earners receiving weekly tips.
+              </p>
+
+              <form className="relative z-10 space-y-4">
+                <input
+                  type="email"
+                  placeholder="name@example.com"
+                  className="w-full px-5 py-4 rounded-xl bg-bg-primary border border-border-base text-text-main placeholder:text-text-muted/50 focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition-all"
+                />
+                <button className="w-full clay-btn py-4 flex items-center justify-center gap-2 shadow-lg group-hover:shadow-brand/25">
+                  Subscribe Now
+                  <Send className="w-4 h-4" />
+                </button>
+              </form>
+
+              <div className="mt-6 flex items-center gap-3 text-xs font-bold text-text-muted uppercase tracking-wider">
+                <ShieldCheck className="w-4 h-4 text-brand" />
+                No spam, unsubscribe anytime.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 🟢 4. BOTTOM BAR (Floating Glass Strip) */}
+        <div className="relative z-20 mx-auto max-w-5xl">
+          <div className="rounded-full bg-bg-surface/80 backdrop-blur-xl border border-border-base shadow-lg py-4 px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-sm font-semibold text-text-muted">
+              <span>&copy; {currentYear} TaskFi Inc.</span>
+              <span className="hidden md:inline text-border-base">|</span>
+              <span className="flex items-center gap-1">
+                Made with{" "}
+                <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 animate-pulse" />
+              </span>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <a
+                href="#"
+                className="flex items-center gap-2 text-sm font-bold text-text-main hover:text-brand transition-colors group"
               >
-                <Send className="w-5 h-5" />
-              </button>
-            </form>
+                <Globe className="w-4 h-4 text-text-muted group-hover:text-brand transition-colors" />
+                Global (EN)
+              </a>
+              <a
+                href="#"
+                className="flex items-center gap-2 text-sm font-bold text-text-main hover:text-brand transition-colors group"
+              >
+                Status
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand"></span>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
-
-        {/* 🏁 BOTTOM BAR */}
-        <div className="border-t border-border-base pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm font-semibold text-text-muted flex items-center gap-1.5">
-            &copy; {currentYear} TaskFi. Crafted with <Heart className="w-4 h-4 text-brand-sec fill-brand-sec animate-pulse-slow" />.
-          </p>
-          
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-bg-surface border border-border-base shadow-sm">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand"></span>
-            </span>
-            <span className="text-xs font-bold text-text-main">All Systems Operational</span>
-          </div>
-        </div>
-
       </div>
     </footer>
   );

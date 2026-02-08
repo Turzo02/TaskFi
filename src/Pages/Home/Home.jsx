@@ -5,6 +5,8 @@ import FeaturedTasksSection from '../../Components/Sections/FeaturedTasksSection
 import HowItWorksSection from '../../Components/Sections/HowItWorksSection';
 import TestimonialsSection from '../../Components/Sections/TestimonialsSection';
 import FAQSection from '../../Components/Sections/FAQSection';
+import CTA from '../../Components/Sections/CTA';
+import Trust from '../../Components/Sections/Trust';
 
 const Home = () => {
   return (
@@ -15,7 +17,9 @@ const Home = () => {
       <FeaturedTasksSection />
       <HowItWorksSection />
       <TestimonialsSection />
+      <Trust />
       <FAQSection />
+      <CTA />
     </div>
   );
 };
